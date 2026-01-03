@@ -1,26 +1,32 @@
 import axios from 'axios';
-import { Note, CreateNote } from "../types/note";
+import {type Note}  from "../types/note";
 
 const BASE_URL = "https://notehub-public.goit.study/api";
 
 export interface FetchNotesResponse {
   notes: Note[];
-  total: number;
   totalPages: number;
 }
 
 const ACCESS_TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
-export const fetchNotes= async (page : number = 1, search : string = "") : Promise<FetchNotesResponse>=> {
+export const fetchNotes= async (onQuery : string, page: number) : Promise<FetchNotesResponse>=> {
     const res = await axios.get<FetchNotesResponse>(BASE_URL + "/notes", {
         headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`,
         },
         params: {
             page,
-            search
+            perPage : 12,
+            search: onQuery,
         }
     });
     return res.data;
+}
+
+export interface CreateNote{
+title:string;
+content :string;
+   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
 export const createNote = async (playload : CreateNote) :Promise<Note[]> => {
