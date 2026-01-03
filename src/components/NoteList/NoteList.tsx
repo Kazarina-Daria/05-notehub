@@ -9,8 +9,9 @@ interface NodeListProps{
 
  export default function Notelist ({notes} : NodeListProps){
 
+        const queryClient = useQueryClient();
+        
   const {mutate } =useMutation({
-      const queryClient = useQueryClient();
     mutationFn: deleteNote,
     onSuccess:() => {
        queryClient.invalidateQueries({ queryKey: ["notes"] }); 
