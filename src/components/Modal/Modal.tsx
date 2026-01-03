@@ -10,12 +10,11 @@ interface ModalProps{
 const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 export default function Modal({onClose, children} : ModalProps){
   useEffect(()=> {
-    document.body.style.overflow = "hidden";
-
     const onEscape = ( e :KeyboardEvent )=>{
       if(e.key === "Escape") onClose();
     }
     window.addEventListener("keydown",onEscape);
+    document.body.style.overflow = "hidden";
     return()=>{
       window.removeEventListener("keydown", onEscape);
     document.body.style.overflow="auto";

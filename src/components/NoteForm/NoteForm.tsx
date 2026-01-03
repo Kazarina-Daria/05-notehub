@@ -58,6 +58,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
           <Field
             id="content"
             name="content"
+            as="textarea"
             rows={8}
             className={css.textarea}
           />
@@ -66,7 +67,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
 
         <div className={css.formGroup}>
           <label htmlFor="tag">Tag</label>
-          <Field id="tag" name="tag" className={css.select}>
+          <Field id="tag" name="tag" as="select" className={css.select}>
             <option value="Todo">Todo</option>
             <option value="Work">Work</option>
             <option value="Personal">Personal</option>
@@ -77,7 +78,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
         </div>
 
         <div className={css.actions}>
-          <button type="button" className={css.cancelButton}>
+          <button type="button" className={css.cancelButton} onClick={onClose}>
             Cancel
           </button>
           <button

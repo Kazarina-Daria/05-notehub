@@ -52,7 +52,8 @@ const { data, isSuccess, isLoading, isError } = useQuery({
       )}
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error loading notes</p>}
-      {isSuccess && data.notes.length > 0 && <NoteList notes={data.notes}/>}
+     {isSuccess && (data?.notes?.length ?? 0) > 0 && <NoteList notes={data.notes} />}
+
 
 {modalOpen && (
   <Modal onClose={closeModal}>
