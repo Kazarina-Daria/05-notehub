@@ -29,18 +29,19 @@ content :string;
    tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
 
-export const createNote = async (playload : CreateNote) :Promise<Note[]> => {
-    const res = await axios.post<Note[]>(BASE_URL + "/notes", playload, {
+export const createNote = async (playload : CreateNote) :Promise<Note> => {
+    const res = await axios.post<Note>(BASE_URL + "/notes", playload, {
         headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`,
         }
     });
     return res.data;
 }
-export const deleteNote = async (id : Note["id"]): Promise<void> =>{
-    await axios.delete<void>(BASE_URL + `/notes/${id}`, {
+export const deleteNote = async (id : Note["id"]): Promise<Note> =>{
+    const res = await axios.delete<Note>(BASE_URL + `/notes/${id}`, {
         headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`,
         }
     });
+    return res.data;
 }
